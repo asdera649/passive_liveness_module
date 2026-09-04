@@ -1,4 +1,4 @@
-# Passive Liveness Detection — Django Module
+# Модуль пассивной проверки живости (Passive Liveness Detection)
 
 ## API
 
@@ -6,13 +6,13 @@
 
 Принимает изображение (multipart или base64), возвращает результат проверки живости.
 
-**Вариант 1 — multipart (curl):**
+**Вариант 1 - multipart (curl):**
 ```bash
 curl -X POST http://localhost:8000/api/liveness/check/ \
      -F "image=@/path/to/face.jpg"
 ```
 
-**Вариант 2 — JSON base64 (JavaScript):**
+**Вариант 2 - JSON base64 (JavaScript):**
 ```js
 const response = await fetch('/api/liveness/check/', {
   method: 'POST',
@@ -88,10 +88,10 @@ def authenticate_user(request):
 
     if not result.is_real:
         reason = result.error or f"Liveness failed (score={result.score:.2f})"
-        # переход к активной проверке (challenge-response)
+        # переход к активной проверке
         return {'step': 'active_liveness', 'reason': reason}
 
-    # Живость подтверждена, продолжить биометрическую проверку
+    # живость подтверждена
     return {'step': 'face_recognition', 'face_bbox': result.face_bbox}
 ```
 
